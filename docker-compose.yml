@@ -1,0 +1,29 @@
+# اجرا:
+#   cp .env.example .env   (و پر کردن نام کاربری/رمز عبور)
+#   mkdir -p sessions logs
+#   docker compose build
+#   docker compose run --rm app                      # لاگین خودکار + ذخیره سشن
+#   docker compose run --rm app node src/probe.js    # عیب‌یابی صفحه (بدون لاگین)
+#   docker compose run --rm app node src/index.js --fresh   # لاگین از نو
+services:
+  app:
+    build: .
+    image: pishgaman-sales-management:latest
+    container_name: pishgaman-sales-management
+    env_file:
+      - .env
+    environment:
+      # داخل کانتینر مرورگر بدون پنجره معنا ندارد
+      HEADLESS: "true"
+      # کش OCR روی ولیوم ذخیره می‌شود تا فقط بار اول دانلود شود
+      TESSERACT_CACHE_PATH: /app/.tesseract-cache
+    volumes:
+      - ./sessions:/app/sessions
+      - ./logs:/app/logs
+      - tessdata:/app/.tesseract-cache
+    # برای پایداری Chromium (در کنار --disable-dev-shm-usage در کد)
+    shm_size: "512mb"
+    restart: "no"
+
+volumes:
+  tessdata:

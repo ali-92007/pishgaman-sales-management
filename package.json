@@ -1,0 +1,23 @@
+{
+  "name": "pishgaman-sales-management",
+  "version": "0.1.0",
+  "description": "ابزار اتوماسیون سامانه my.pishgaman.net — مرحله ۱: لاگین خودکار با OCR کپچا و ذخیره سشن",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "probe": "node src/probe.js",
+    "test:ocr": "node tools/test-ocr.js",
+    "test:e2e": "node tools/test-e2e.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "puppeteer": "^25.18.1",
+    "sharp": "^0.35.5",
+    "tesseract.js": "^7.0.0"
+  },
+  "private": true,
+  "license": "UNLICENSED"
+}
